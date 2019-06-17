@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>sampliano</title>
+    <link href='https://fonts.googleapis.com/css?family=Muli&display=swap' rel='stylesheet'>
+    <script type='text/javascript' src='/bundle.js' defer></script>
+    <script type='text/javascript'>
+      if(typeof AudioContext != 'undefined' || typeof webkitAudioContext != 'undefined') {
+        var resumeAudio = function() {
+          if(typeof g_WebAudioContext == 'undefined' || g_WebAudioContext == null) return
+          if(g_WebAudioContext.state == 'suspended') g_WebAudioContext.resume()
+          document.removeEventListener('click', resumeAudio)
+        }
+        document.addEventListener('click', resumeAudio)
+      }
+    </script>
+  </head>
+  <body>
+    <div id='app'></div>
+  </body>
+</html>
