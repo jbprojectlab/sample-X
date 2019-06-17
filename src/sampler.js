@@ -5,12 +5,11 @@ import {AudioIn, SoundRecorder, SoundFile} from 'p5'
 
 const mic = new AudioIn()
 const recorder = new SoundRecorder()
-const sample = new SoundFile()
 
 class Sampler extends Component {
   state = {
     micState: 0,
-    sample
+    sample: new SoundFile()
   }
 
   componentDidMount() {
@@ -18,7 +17,7 @@ class Sampler extends Component {
     recorder.setInput(mic)
   }
 
-  assignSample = evt => {
+  recordSample = evt => {
     const {micState, sample} = this.state
     if(micState === 0 && mic.enabled) {
       recorder.record(sample)
@@ -35,11 +34,13 @@ class Sampler extends Component {
   }
 
   render() {
-    const {assignSample, playSample} = this
+    const {recordSample, playSample} = this
     return (
       <Fragment>
-        <button onClick={assignSample}>Click to assign sample</button>
-        <button onClick={playSample}>Click to play sample</button>
+        <div className='sampler w-150'>
+          <button className='record-btn w-150' onClick={recordSample}>Click to record sample</button>
+          <button className='play-btn w-150' onClick={playSample}>Click to play sample</button>
+        </div>
       </Fragment>
     )
   }

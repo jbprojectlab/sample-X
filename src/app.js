@@ -7,6 +7,12 @@ const App = () => (
   <Fragment>
     <Sampler />
     <Sampler />
+    <Sampler />
+    <Sampler />
+    <Sampler />
+    <Sampler />
+    <Sampler />
+    <Sampler />
   </Fragment>
 )
 
