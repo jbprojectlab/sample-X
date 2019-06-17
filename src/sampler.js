@@ -1,5 +1,4 @@
 import React, {Component, Fragment} from 'react'
-import ReactDOM from 'react-dom'
 import 'p5/lib/addons/p5.sound'
 import {AudioIn, SoundRecorder, SoundFile} from 'p5'
 
@@ -16,6 +15,16 @@ class Sampler extends Component {
     mic.start()
     recorder.setInput(mic)
   }
+
+  // componentDidUpdate(prevProps) {
+  //   const {micState} = this.state
+  //   const {pressedKey, keyVal} = this.props
+  //   const {recordSample, playSample} = this
+  //   if(this.props !== prevProps && pressedKey === keyVal) {
+  //     if(micState === 1) playSample()
+  //     else recordSample()
+  //   }
+  // }
 
   recordSample = evt => {
     const {micState, sample} = this.state
@@ -34,6 +43,8 @@ class Sampler extends Component {
   }
 
   render() {
+    const {micState} = this.state
+    const {pressedKey, keyVal} = this.props
     const {recordSample, playSample} = this
     return (
       <Fragment>
