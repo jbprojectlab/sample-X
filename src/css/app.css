@@ -2,9 +2,10 @@ body, html {
   font-family: 'Muli', sans-serif;
 }
 
-#app {
+.row {
   display: flex;
   flex-wrap: wrap;
+  margin: 0 auto;
   justify-content: center;
 }
 

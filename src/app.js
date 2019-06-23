@@ -1,43 +1,39 @@
-import React, {Component, Fragment} from 'react'
-import ReactDOM from 'react-dom'
+import React, {useState, useEffect, Fragment} from 'react'
 import Sampler from './sampler'
 import Keyboard from './keyboard'
 import './css/app.css'
 
 const keyVals = ['r', 't', 'y', 'u', 'f', 'g', 'h', 'j']
 
-class App extends Component {
-  state = {
-    pressedKey: ''
+const App = () => {
+  const [pressedKey, setPressedKey] = useState('')
+
+  const handleKeyPress = ({key}) => {
+    setPressedKey(key)
   }
 
-  handleChange = input => {
-    console.log("Input changed", input)
-  }
-
-  handleKeyPress = pressedKey => {
-    console.log('pressedKey:  ', pressedKey)
-    this.setState({pressedKey})
-  }
-
-  render() {
-    const {handleChange, handleKeyPress} = this
-    const {pressedKey} = this.state
-    return (
-      <Fragment>
-        {keyVals.map(keyVal => <Sampler
+  const row1 = keyVals.slice(0, 4)
+  const row2 = keyVals.slice(4)
+  return (
+    <div tabIndex='0' onKeyDown={handleKeyPress}>
+      <div className='row'>
+        {row1.map(keyVal => <Sampler
           keyVal={keyVal}
           pressedKey={pressedKey}
-          handleKeyPress={handleKeyPress}
         />)}
-        <Keyboard
-          keyVals={keyVals}
-          handleChange={handleChange}
-          handleKeyPress={handleKeyPress}
-        />
-      </Fragment>
-    )
-  }
+      </div>
+      <div className='row'>
+        {row2.map(keyVal => <Sampler
+          keyVal={keyVal}
+          pressedKey={pressedKey}
+        />)}
+      </div>
+      <Keyboard
+        keyVals={keyVals}
+        handleKeyPress={handleKeyPress}
+      />
+    </div>
+  )
 }
 
 export default App
