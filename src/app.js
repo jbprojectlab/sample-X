@@ -8,6 +8,10 @@ const keyVals = ['r', 't', 'y', 'u', 'f', 'g', 'h', 'j']
 const App = () => {
   const [pressedKey, setPressedKey] = useState('')
 
+  const startSamplers = context => {
+    if(context.state === 'suspended') context.resume()
+  }
+
   const handleKeyPress = ({key}) => {
     setPressedKey(key)
   }
@@ -19,12 +23,14 @@ const App = () => {
       <div className='row'>
         {row1.map(keyVal => <Sampler
           keyVal={keyVal}
+          start={startSamplers}
           pressedKey={pressedKey}
         />)}
       </div>
       <div className='row'>
         {row2.map(keyVal => <Sampler
           keyVal={keyVal}
+          start={startSamplers}
           pressedKey={pressedKey}
         />)}
       </div>

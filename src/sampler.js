@@ -4,7 +4,7 @@ import {AudioIn, SoundRecorder, SoundFile} from 'p5'
 const mic = new AudioIn()
 const recorder = new SoundRecorder()
 
-const Sampler = ({pressedKey, keyVal}) => {
+const Sampler = ({keyVal, start, pressedKey}) => {
   const soundFile = new SoundFile()
   const [micState, setMicState] = useState(0)
   const [sample, setSample] = useState(soundFile)
@@ -12,11 +12,12 @@ const Sampler = ({pressedKey, keyVal}) => {
   const enableMic = () => {
     mic.start()
     recorder.setInput(mic)
+    start(mic.input.context)
   }
 
   const onKeyDown = () => {
     console.log(mic.getLevel())
-    window.addEventListener('keydown', ({key}) => {
+    window.addEventListener('keydown', ({key, repeat}) => {
       if(key === keyVal) {
         if(micState === 0) {
           console.log('recording')
