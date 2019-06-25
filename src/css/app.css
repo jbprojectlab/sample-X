@@ -48,6 +48,14 @@ body, html {
   background: #46933b;
 }
 
+.on {
+  color: #46933b;
+}
+
+.off {
+  color: #6a7c96;
+}
+
 .w-150 {
   width: 150px;
 }
