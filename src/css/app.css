@@ -1,23 +1,39 @@
 body, html {
   font-family: 'Muli', sans-serif;
+  background: #f2f4f7;
+}
+
+#title-header {
+  margin-left: 20px;
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
+  padding-bottom: 8%;
   justify-content: center;
 }
 
 .sampler {
   height: 120px;
   margin: 20px;
+  text-align: center;
 }
 
-.play-btn {
+.sampler h6 {
+  margin-top: 1em;
+  margin-bottom: 1.5em;
+}
+
+.oscilloscope {
   height: 100px;
+  color: white;
+  background: #6a7c96;
 }
 
+/*  background: #d64f4f;
+*/
 .w-150 {
   width: 150px;
 }

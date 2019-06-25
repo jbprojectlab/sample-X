@@ -19,7 +19,8 @@ const App = () => {
   const row1 = keyVals.slice(0, 4)
   const row2 = keyVals.slice(4)
   return (
-    <div tabIndex='0'>
+    <div>
+      <h2 id='title-header'>sample-X</h2>
       <div className='row'>
         {row1.map(keyVal => <Sampler
           keyVal={keyVal}

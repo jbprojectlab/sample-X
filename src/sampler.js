@@ -6,6 +6,7 @@ const recorder = new SoundRecorder()
 
 const Sampler = ({keyVal, start, pressedKey}) => {
   const sample = new SoundFile()
+  const upperCaseKeyVal = keyVal.toUpperCase()
 
   const enableMic = () => {
     mic.start()
@@ -18,7 +19,7 @@ const Sampler = ({keyVal, start, pressedKey}) => {
       if(key === keyVal && repeat) {
         console.log('repeating & recording')
         recorder.record(sample)
-      } else if(key === keyVal.toUpperCase() && sample.buffer && !sample.isPlaying()) {
+      } else if(key === upperCaseKeyVal && sample.buffer && !sample.isPlaying()) {
         sample.play()
       }
     })
@@ -31,8 +32,9 @@ const Sampler = ({keyVal, start, pressedKey}) => {
   return (
     <Fragment>
       <div className='sampler w-150'>
-        <h6 className='record-btn w-150'>Press {keyVal} to record sample</h6>
-        <button className='play-btn w-150' onClick={() => sample.play()} >Click to play sample</button>
+        <h6 className='record w-150'>HOLD {upperCaseKeyVal} to RECORD</h6>
+        <h6>PRESS  + {upperCaseKeyVal} to PLAY</h6>
+        <div className='oscilloscope w-150'>{upperCaseKeyVal}</div>
       </div>
     </Fragment>
   )
