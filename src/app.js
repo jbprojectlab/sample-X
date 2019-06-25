@@ -19,19 +19,17 @@ const App = () => {
   const row1 = keyVals.slice(0, 4)
   const row2 = keyVals.slice(4)
   return (
-    <div tabIndex='0' onKeyDown={handleKeyPress}>
+    <div tabIndex='0'>
       <div className='row'>
         {row1.map(keyVal => <Sampler
           keyVal={keyVal}
           start={startSamplers}
-          pressedKey={pressedKey}
         />)}
       </div>
       <div className='row'>
         {row2.map(keyVal => <Sampler
           keyVal={keyVal}
           start={startSamplers}
-          pressedKey={pressedKey}
         />)}
       </div>
       <Keyboard

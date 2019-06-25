@@ -5,9 +5,7 @@ const mic = new AudioIn()
 const recorder = new SoundRecorder()
 
 const Sampler = ({keyVal, start, pressedKey}) => {
-  const soundFile = new SoundFile()
-  const [micState, setMicState] = useState(0)
-  const [sample, setSample] = useState(soundFile)
+  const sample = new SoundFile()
 
   const enableMic = () => {
     mic.start()
@@ -15,29 +13,20 @@ const Sampler = ({keyVal, start, pressedKey}) => {
     start(mic.input.context)
   }
 
-  const onKeyDown = () => {
-    console.log(mic.getLevel())
+  const recordSample = () => {
     window.addEventListener('keydown', ({key, repeat}) => {
-      if(key === keyVal) {
-        if(micState === 0) {
-          console.log('recording')
-          recorder.record(sample)
-          setMicState(1)
-        } else if(micState === 1) {
-          console.log('stopping')
-          recorder.stop()
-          setMicState(2)
-        }
+      if(key === keyVal && repeat) {
+        console.log('repeating & recording')
+        recorder.record(sample)
       } else if(key === keyVal.toUpperCase() && sample.buffer && !sample.isPlaying()) {
         sample.play()
-        const emptySoundFile = new SoundFile()
-        setSample(emptySoundFile)
-        setMicState(0)
       }
     })
+    window.addEventListener('keyup', ({key}) => key === keyVal && recorder.stop())
   }
+
   useEffect(enableMic)
-  useEffect(onKeyDown)
+  useEffect(recordSample)
 
   return (
     <Fragment>
