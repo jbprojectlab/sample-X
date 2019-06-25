@@ -7,6 +7,7 @@ const recorder = new SoundRecorder()
 const Sampler = ({keyVal, start, pressedKey}) => {
   const sample = new SoundFile()
   const upperCaseKeyVal = keyVal.toUpperCase()
+  const [recorderState, setRecorderState] = useState('inactive')
 
   const enableMic = () => {
     mic.start()
@@ -19,11 +20,19 @@ const Sampler = ({keyVal, start, pressedKey}) => {
       if(key === keyVal && repeat) {
         console.log('repeating & recording')
         recorder.record(sample)
+        setRecorderState('recording')
       } else if(key === upperCaseKeyVal && sample.buffer && !sample.isPlaying()) {
         sample.play()
+        setRecorderState('playing')
+        setInterval(() => setRecorderState('inactive'), sample.buffer.duration * 1000 + 100)
       }
     })
-    window.addEventListener('keyup', ({key}) => key === keyVal && recorder.stop())
+    window.addEventListener('keyup', ({key}) => {
+      if(key === keyVal) {
+        recorder.stop()
+        setRecorderState('inactive')
+      }
+    })
   }
 
   useEffect(enableMic)
@@ -34,7 +43,7 @@ const Sampler = ({keyVal, start, pressedKey}) => {
       <div className='sampler w-150'>
         <h6 className='record w-150'>HOLD {upperCaseKeyVal} to RECORD</h6>
         <h6>PRESS  + {upperCaseKeyVal} to PLAY</h6>
-        <div className='oscilloscope w-150'>{upperCaseKeyVal}</div>
+        <div className={`oscilloscope w-150 ${recorderState}`}>{upperCaseKeyVal}</div>
       </div>
     </Fragment>
   )

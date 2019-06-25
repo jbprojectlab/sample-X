@@ -11,7 +11,7 @@ body, html {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
-  padding-bottom: 8%;
+  padding-bottom: 6%;
   justify-content: center;
 }
 
@@ -22,18 +22,31 @@ body, html {
 }
 
 .sampler h6 {
-  margin-top: 1em;
+  margin-top: 0;
   margin-bottom: 1.5em;
 }
 
 .oscilloscope {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100px;
   color: white;
   background: #6a7c96;
 }
 
-/*  background: #d64f4f;
-*/
+.inactive {
+  background: #6a7c96;  
+}
+
+.recording {
+  background: #d64f4f;
+}
+
+.playing {
+  background: #46933b;
+}
+
 .w-150 {
   width: 150px;
 }
