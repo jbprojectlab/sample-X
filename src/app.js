@@ -1,6 +1,5 @@
 import React, {useState, useEffect, Fragment} from 'react'
 import Sampler from './sampler'
-import Keyboard from './keyboard'
 import './css/app.css'
 
 const keyVals = ['r', 't', 'y', 'u', 'f', 'g', 'h', 'j']
@@ -10,10 +9,6 @@ const App = () => {
 
   const startSamplers = context => {
     if(context.state === 'suspended') context.resume()
-  }
-
-  const handleKeyPress = ({key}) => {
-    setPressedKey(key)
   }
 
   const row1 = keyVals.slice(0, 4)
@@ -33,10 +28,6 @@ const App = () => {
           start={startSamplers}
         />)}
       </div>
-      <Keyboard
-        keyVals={keyVals}
-        handleKeyPress={handleKeyPress}
-      />
     </div>
   )
 }

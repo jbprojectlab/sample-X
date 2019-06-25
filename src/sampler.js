@@ -42,8 +42,10 @@ const Sampler = ({keyVal, start, pressedKey}) => {
     <Fragment>
       <div className='sampler w-150'>
         <h6 className='record w-150'>HOLD {upperCaseKeyVal} to RECORD</h6>
-        <h6>PRESS  + {upperCaseKeyVal} to PLAY</h6>
-        <div className={`oscilloscope w-150 ${recorderState}`}>{upperCaseKeyVal}</div>
+        <h6>PRESS SHIFT + {upperCaseKeyVal} to PLAY</h6>
+        <div className={`interface w-150 ${recorderState}`}>
+          {upperCaseKeyVal}
+        </div>
       </div>
     </Fragment>
   )
