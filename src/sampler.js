@@ -12,6 +12,7 @@ const Sampler = ({keyVal, start, pressedKey}) => {
   const [recorderState, setRecorderState] = useState('inactive')
   const [delayState, setDelayState] = useState('off')
   const [reverbState, setReverbState] = useState('off')
+  const [reverseState, setReverseState] = useState('off')
 
   const enableMic = () => {
     mic.start()
@@ -28,22 +29,6 @@ const Sampler = ({keyVal, start, pressedKey}) => {
           recorder.record(sample)
           setRecorderState('recording')
         }
-      } else if(key === upperCaseKeyVal && sample.buffer && !sample.isPlaying()) {
-        if(delayState === 'on') {
-          delay.process(sample)
-          sample.play()
-        } else {
-          sample.play()
-        }
-        if(reverbState === 'on') {
-          reverb.process(sample)
-          sample.play()
-        } else {
-          sample.play()
-        }
-        sample.play()
-        setRecorderState('playing')
-        setInterval(() => setRecorderState('inactive'), sample.buffer.duration * 1000 + 100)
       }
     })
     window.addEventListener('keyup', ({key}) => {
@@ -52,6 +37,25 @@ const Sampler = ({keyVal, start, pressedKey}) => {
         setRecorderState('inactive')
       }
     })
+  }
+
+  const playSample = () => {
+    window.addEventListener('keydown', ({key}) => {
+      if(key === upperCaseKeyVal && sample.buffer && !sample.isPlaying()) {
+        if(delayState === 'on') {
+          delay.process(sample)
+        }
+        if(reverbState === 'on') {
+          reverb.process(sample)
+        }
+        if(reverseState === 'on') {
+          sample.reverseBuffer()
+        }
+        sample.play()
+        setRecorderState('playing')
+        setInterval(() => setRecorderState('inactive'), sample.buffer.duration * 1000 + 100)
+      }
+    })  
   }
 
   const toggleEffect = ({target}) => {
@@ -65,12 +69,17 @@ const Sampler = ({keyVal, start, pressedKey}) => {
         let toggledReverbState = reverbState === 'on' ? 'off' : 'on'
         setReverbState(toggledReverbState)
         break
+      case 'reverse':
+        let toggledReverseState = reverseState === 'on' ? 'off' : 'on'
+        setReverseState(toggledReverseState)
+        break
       default: break
     }
   }
 
   useEffect(enableMic)
   useEffect(recordSample)
+  useEffect(playSample)
 
   return (
     <Fragment>
@@ -82,6 +91,7 @@ const Sampler = ({keyVal, start, pressedKey}) => {
           <div className='effects-container'>
             <button className={delayState} name='delay' state={delayState} onClick={toggleEffect}>DELAY</button>
             <button className={reverbState} name='reverb' state={reverbState} onClick={toggleEffect}>REVERB</button>
+            <button className={reverseState} name='reverse' state={reverseState} onClick={toggleEffect}>REVERSE BUFFER</button>
           </div>
         </div>
       </div>
