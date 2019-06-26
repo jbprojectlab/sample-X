@@ -4,6 +4,9 @@ import {AudioIn, SoundRecorder, SoundFile, Delay, Reverb} from 'p5'
 const mic = new AudioIn()
 const recorder = new SoundRecorder()
 const delay = new Delay()
+delay.filter(300, 1)
+delay.setType('pingPong')
+delay.feedback(.2)
 const reverb = new Reverb()
 
 const Sampler = ({keyVal, start, pressedKey}) => {
@@ -43,12 +46,12 @@ const Sampler = ({keyVal, start, pressedKey}) => {
     window.addEventListener('keydown', ({key}) => {
       if(key === upperCaseKeyVal && sample.buffer && !sample.isPlaying()) {
         if(delayState === 'on') {
-          delay.process(sample)
+          delay.process(sample, .12, .7, 2300)
         }
         if(reverbState === 'on') {
           reverb.process(sample)
         }
-        if(reverseState === 'on') {
+        if(reverseState === 'on' && !sample.reversed) {
           sample.reverseBuffer()
         }
         sample.play()
