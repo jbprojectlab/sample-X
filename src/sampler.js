@@ -18,7 +18,7 @@ const Sampler = ({keyVal, start, pressedKey}) => {
     recorder.setInput(mic)
     start(mic.input.context)
   }
-
+  
   const recordSample = () => {
     window.addEventListener('keydown', ({key, repeat}) => {
       if(key === keyVal) {

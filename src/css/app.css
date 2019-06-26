@@ -29,11 +29,13 @@ body, html {
 
 .interface {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100px;
   color: white;
   background: #6a7c96;
+
 }
 
 .inactive {
@@ -49,7 +51,7 @@ body, html {
 }
 
 .on {
-  color: #46933b;
+  color: #d64f4f;
 }
 
 .off {
@@ -58,4 +60,17 @@ body, html {
 
 .w-150 {
   width: 150px;
+}
+
+.p5Canvas {
+  border: 1px solid white;
+}
+
+button {
+  background: white;
+}
+
+button:active {
+  background: #d64f4f;
+  outline: none;
 }
