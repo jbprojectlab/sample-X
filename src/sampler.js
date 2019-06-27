@@ -87,15 +87,13 @@ const Sampler = ({keyVal, start, pressedKey}) => {
   return (
     <Fragment>
       <div className='sampler w-150'>
-        <h6 className='record w-150'>HOLD {upperCaseKeyVal} to RECORD</h6>
-        <h6>PRESS SHIFT + {upperCaseKeyVal} to PLAY</h6>
         <div className={`interface w-150 ${recorderState}`}>
           <h2>{upperCaseKeyVal}</h2>
-          <div className='effects-container'>
-            <button className={delayState} name='delay' state={delayState} onClick={toggleEffect}>DELAY</button>
-            <button className={reverbState} name='reverb' state={reverbState} onClick={toggleEffect}>REVERB</button>
-            <button className={reverseState} name='reverse' state={reverseState} onClick={toggleEffect}>REVERSE BUFFER</button>
-          </div>
+        </div>
+        <div className='effects-container'>
+          <button className={`${delayState} w-150`} name='delay' state={delayState} onClick={toggleEffect}>DELAY</button>
+          <button className={`${reverbState} w-150`} name='reverb' state={reverbState} onClick={toggleEffect}>REVERB</button>
+          <button className={`${reverseState} w-150`} name='reverse' state={reverseState} onClick={toggleEffect}>REVERSE BUFFER</button>
         </div>
       </div>
     </Fragment>

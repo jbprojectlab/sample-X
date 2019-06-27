@@ -13,7 +13,15 @@ const App = () => {
 
   return (
     <div>
-      <h2 id='title-header'>sample-X</h2>
+      <div id='header-container'>
+        <div id='header'>
+          <h2 id='title'>sample-X</h2>
+          <div id='instructions'>
+            <h6 className='record w-150'>HOLD KEY to RECORD</h6>
+            <h6>PRESS SHIFT + KEY to PLAY</h6>
+          </div>
+        </div>
+      </div>
       <div className='row'>
         <div className='section'>
           <div className='container'>
