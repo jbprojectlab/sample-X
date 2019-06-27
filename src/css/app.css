@@ -1,6 +1,8 @@
 body, html {
   font-family: 'Muli', sans-serif;
   background: #f2f4f7;
+  height: 100%;
+  overflow-y: scroll;
 }
 
 #title-header {
@@ -12,8 +14,19 @@ body, html {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
-  padding-bottom: 6%;
   justify-content: center;
+}
+
+.section {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.container {
+  width: 50%;
+  flex-wrap: wrap;
+  display: flex;
 }
 
 .sampler {
@@ -72,4 +85,15 @@ button {
 button:active {
   background: #d64f4f;
   outline: none;
+}
+  
+@media only screen and (max-width: 775px) {
+  .section {
+    display: inline-block;
+  }
+
+  .container {
+    width: 100vw;
+    justify-content: space-around;
+  }
 }
